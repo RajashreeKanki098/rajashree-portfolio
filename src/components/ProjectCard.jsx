@@ -2,28 +2,8 @@ import { ArrowUpRight } from 'lucide-react'
 import ScreenshotPlaceholder from './ScreenshotPlaceholder'
 import Tag from './Tag'
 
-// Only projects with a real screenshot go here.
-// Anything not listed (e.g. sajdhaj) automatically falls back to the placeholder.
-import bssfShot from '../assets/bssf.png'
-import devnarShot from '../assets/devnar.png'
-import grobigShot from '../assets/grobig.png'
-import metlShot from '../assets/metl.png'
-import pressclubShot from '../assets/pressclub.png'
-
-const projectImages = {
-  bssf: bssfShot,
-  devnar: devnarShot,
-  grobig: grobigShot,
-  metl: metlShot,
-  pressclub: pressclubShot,
-}
-
 export default function ProjectCard({ project, index, onOpenCaseStudy }) {
   const recordId = `PRJ-${String(index + 1).padStart(2, '0')}`
-  const image = projectImages[project.id]
-
-  const hasWebsite = project.links.website && !project.links.website.startsWith('[')
-  const hasApp = Boolean(project.links.app)
 
   return (
     <div className="group rounded-lg border border-line bg-panel transition-colors hover:border-line2">
@@ -57,8 +37,9 @@ export default function ProjectCard({ project, index, onOpenCaseStudy }) {
               View Case Study
               <ArrowUpRight size={14} />
             </button>
-            {hasApp && (
-              <a href={project.links.app}
+            {project.links.app && (
+              <a
+                href={project.links.app}
                 target="_blank"
                 rel="noreferrer"
                 className="font-mono text-xs text-muted transition-colors hover:text-accent"
@@ -66,9 +47,9 @@ export default function ProjectCard({ project, index, onOpenCaseStudy }) {
                 Google Play ↗
               </a>
             )}
-            {hasWebsite && (
-              
-              <a href={project.links.website}
+            {project.links.website && !project.links.website.startsWith('[') && (
+              <a
+                href={project.links.website}
                 target="_blank"
                 rel="noreferrer"
                 className="font-mono text-xs text-muted transition-colors hover:text-accent"
@@ -79,15 +60,7 @@ export default function ProjectCard({ project, index, onOpenCaseStudy }) {
           </div>
         </div>
 
-        {image ? (
-          <img
-            src={image}
-            alt={`${project.name} screenshot`}
-            className="aspect-video w-full rounded-md border border-line object-cover"
-          />
-        ) : (
-          <ScreenshotPlaceholder label={project.shortName} />
-        )}
+        <ScreenshotPlaceholder label={project.shortName} screenshots={project.screenshots} />
       </div>
     </div>
   )

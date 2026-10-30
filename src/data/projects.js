@@ -1,8 +1,80 @@
 // Central project data source.
-// Add a new project by appending an object to this array — every section
-// (Featured Projects, More Projects, Case Study modal) reads from here.
+import dis from '../assets/dis.png'
+import disAdmin from '../assets/dis_admin.png'
+import metl from '../assets/metl.png'
+import grobig from '../assets/grobig.png'
+import devnar from '../assets/devnar.png'
+import pressclub from '../assets/pressclub.png'
+// import sajdhaj from '../assets/sajdhaj.png'   // add when you have the file
+import bssf from '../assets/bssf.png'
+
 
 export const projects = [
+  {
+    id: 'wrddl',
+    slug: 'wrddl-portal',
+    name: 'WRDDL: Western Regional Disease Diagnostic Laboratory Portal',
+    shortName: 'WRDDL',
+    type: 'Government Web Portal + Admin CMS (Trilingual)',
+    tags: ['Government Portal', 'Admin CMS', 'Trilingual'],
+    status: 'Completed, awaiting deployment',
+    featured: true,
+    overview:
+      "A full-stack web portal for the Bharat Ratna Atal Bihari Vajpayee Western Regional Disease Diagnostic Laboratory (WRDDL), a diagnostic facility under the Ministry of Agriculture and Farmers Welfare, Government of India. The portal serves livestock and poultry farmers and veterinarians in western India, presenting the laboratory's services, research and public disclosures in English, Marathi and Hindi.",
+    businessProblem:
+      'The laboratory needed an official digital presence where farmers and veterinarians could find diagnostic services, recent sample information, research output and statutory disclosures in their own language. Lab staff also needed to update content without developer involvement.',
+    solution:
+      'A public-facing portal with a separate admin panel. Staff manage content as structured data in the admin panel, and every change is reflected on the public site, which runs in English, Marathi and Hindi.',
+    myContribution: [
+      'UI/UX design for the public portal and the admin panel',
+      'Frontend and backend development, including APIs and data models',
+      'Trilingual support (English, Marathi, Hindi) across all content',
+      'Admin CMS where data entered drives the public site',
+      'E-services, RTI/RTS and committee sections structured for government disclosure needs',
+    ],
+    features: [
+      {
+        group: 'Public Portal',
+        items: [
+          'Lab facilities and services',
+          'Projects and events',
+          'Recent samples',
+          'Research and analysis',
+          'Sidebar navigation across all sections',
+        ],
+      },
+      {
+        group: 'E-Services & Compliance',
+        items: [
+          'E-services for sample submission',
+          'RTI (Right to Information)',
+          'RTS (Right to Services)',
+          'Vishakha Committee and other committees',
+        ],
+      },
+      {
+        group: 'Admin Panel',
+        items: [
+          'Add, edit and delete content records',
+          'Changes reflect on the public site',
+          'Manage projects, events, samples and research',
+          'Manage committee and disclosure pages',
+        ],
+      },
+      {
+        group: 'Multilingual',
+        items: ['English', 'Marathi (मराठी)', 'Hindi (हिंदी)', 'Per-language content managed from admin'],
+      },
+    ],
+    screenshots: [
+      { src: dis, caption: 'Public portal' },
+      { src: disAdmin, caption: 'Admin panel: content changes reflect on the public site' },
+    ],
+    tech: ['React', 'Tailwind CSS', 'Node.js', 'REST APIs'], // replace with your actual stack
+    links: { website: null, app: null, reference: null }, // no public link, by design
+    note: 'Built and approved; the live URL is not shown because the site is pending deployment on the official government domain.',
+    role: 'Full Stack Developer: UI/UX, frontend, backend, multilingual CMS',
+  },
   {
     id: 'metl',
     slug: 'metl-erp',
@@ -33,11 +105,17 @@ export const projects = [
       { group: 'Reporting', items: ['Stock reports', 'Inventory reports', 'Sales reports', 'ABC analysis', 'FMS analysis'] },
       { group: 'Access Control', items: ['Role-based access', 'Permission management', 'Branch-level access'] },
     ],
+    screenshots: [
+      { src: metl, caption: 'Inventory & stock management' },
+    ],
     tech: ['Enterprise Web Application'],
     links: {
-      
-      
-      
+      website: null,
+      app: null,
+      // reference: {
+      //   label: 'Organization reference',
+      //   // url: 'https://www.legal500.com/gc-powerlist/africa-teams-2016/mohammed-enterprises-tanzania-metl-group/',
+      // },
     },
     role: 'Full Stack Developer — enterprise module development, inventory & multi-branch systems',
   },
@@ -66,9 +144,12 @@ export const projects = [
       { group: 'Customer App', items: ['Browse products', 'View product information', 'Place orders', 'Track orders'] },
       { group: 'Delivery System', items: ['Assign orders to delivery personnel', 'Accept / cancel orders', 'Complete deliveries', 'OTP-verified order confirmation'] },
     ],
+    screenshots: [
+      { src: grobig, caption: 'Admin panel: products, orders and subscriptions' },
+    ],
     tech: ['React.js', 'CodeIgniter', 'PHP', 'MySQL', 'REST APIs'],
     links: {
-      
+      website: null,
       app: 'https://play.google.com/store/apps/details?id=com.advitsoft.customer&pcampaignid=web_share',
       reference: null,
     },
@@ -99,6 +180,10 @@ export const projects = [
       { group: 'Donations', items: ['Food donations', 'Student sponsorship', 'Sponsorship donations', 'Asset donations', 'Digital receipt on successful payment', 'Offline / on-site donation entry with immediate receipt'] },
       { group: 'Admin Panel', items: ['Inventory management', 'Food IN / Food OUT', 'Stock ledger', 'Inventory reports', 'Donation summary', 'Student registration', 'Staff registration', 'Website & app content management', 'Donation entries'] },
     ],
+    screenshots: [
+      { src: devnar, caption: 'Donation flow & admin panel' },
+    ],
+
     tech: ['React.js', 'CodeIgniter', 'PHP', 'PWA', 'REST APIs'],
     links: {
       website: 'https://devnarfoundationfortheblind.org/',
@@ -129,6 +214,9 @@ export const projects = [
     features: [
       { group: 'Application', items: ['Login', 'Canteen menu', 'Photo gallery', 'Video gallery', 'Events', 'News', 'Hall information', 'Upcoming events', 'Membership information'] },
       { group: 'Admin Panel', items: ['Content management for app information'] },
+    ],
+    screenshots: [
+      { src: pressclub, caption: 'Member app & content management' },
     ],
     tech: ['React.js', 'CodeIgniter', 'PHP', 'REST APIs'],
     links: {
@@ -163,7 +251,7 @@ export const projects = [
     ],
     tech: ['Laravel', 'HTML', 'CSS', 'JavaScript', 'PWA'],
     links: {
-      
+      website: '[ADD WEBSITE URL]',
       app: 'https://play.google.com/store/apps/details?id=com.sajdhajcreations&pcampaignid=web_share',
       reference: null,
     },
@@ -195,6 +283,9 @@ export const projects = [
       { group: 'Website', items: ['Donation page', 'PhonePe payment integration'] },
       { group: 'APIs', items: ['API development for application/backend integration (consumed via Node.js)'] },
       { group: 'Admin', items: ['Admin management', 'Frontend content management'] },
+    ],
+    screenshots: [
+      { src: bssf, caption: 'Donation page with PhonePe integration' },
     ],
     tech: ['PHP', 'Node.js', 'REST APIs', 'PhonePe'],
     links: {

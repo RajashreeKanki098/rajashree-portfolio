@@ -12,8 +12,8 @@ export const profile = {
     year: '2024',
   },
   social: {
-    github: 'https://github.com/RajashreeKanki098', // [ADD GITHUB]
-    linkedin: 'https://www.linkedin.com/in/rajashree-kanki-825630238/', // [ADD LINKEDIN]
+    linkedin: 'https://www.linkedin.com/in/rajashree-kanki-825630238/', // [ADD GITHUB]
+    github: 'https://github.com/RajashreeKanki098', // [ADD LINKEDIN]
   },
   heroHeading: 'Building web applications that solve real business problems.',
   heroSubheading:

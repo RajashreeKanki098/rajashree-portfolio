@@ -4,22 +4,6 @@ import { ExternalLink, X } from 'lucide-react'
 import ScreenshotPlaceholder from './ScreenshotPlaceholder'
 import Tag from './Tag'
 
-// Only projects with a real screenshot go here.
-// Anything not listed (e.g. sajdhaj) automatically falls back to the placeholder.
-import bssfShot from '../assets/bssf.png'
-import devnarShot from '../assets/devnar.png'
-import grobigShot from '../assets/grobig.png'
-import metlShot from '../assets/metl.png'
-import pressclubShot from '../assets/pressclub.png'
-
-const projectImages = {
-  bssf: bssfShot,
-  devnar: devnarShot,
-  grobig: grobigShot,
-  metl: metlShot,
-  pressclub: pressclubShot,
-}
-
 export default function CaseStudyModal({ project, onClose }) {
   useEffect(() => {
     if (!project) return
@@ -79,17 +63,8 @@ export default function CaseStudyModal({ project, onClose }) {
                 ))}
               </div>
 
-              <div className="mt-6">
-                {projectImages[project.id] ? (
-                  <img
-                    src={projectImages[project.id]}
-                    alt={`${project.name} screenshot`}
-                    className="aspect-video w-full rounded-md border border-line object-cover"
-                  />
-                ) : (
-                  <ScreenshotPlaceholder label={project.shortName} />
-                )}
-              </div>
+              <ScreenshotPlaceholder label={project.shortName} screenshots={project.screenshots} />
+              <div className="mt-2" />
 
               <Block title="Overview" text={project.overview} />
               <Block title="Business Problem" text={project.businessProblem} />
@@ -123,7 +98,20 @@ export default function CaseStudyModal({ project, onClose }) {
                 </div>
               </Section>
 
-              <LinksSection project={project} />
+              <Section title="Links">
+                <div className="flex flex-wrap gap-3">
+                  {project.links.website && (
+                    <LinkPill href={project.links.website} label="Website" />
+                  )}
+                  {project.links.app && <LinkPill href={project.links.app} label="Google Play" />}
+                  {project.links.reference && (
+                    <LinkPill href={project.links.reference.url} label={project.links.reference.label} />
+                  )}
+                  {!project.links.website && !project.links.app && !project.links.reference && (
+                    <span className="font-mono text-xs text-muted2">[ADD LINK]</span>
+                  )}
+                </div>
+              </Section>
             </div>
           </motion.div>
         </motion.div>
@@ -149,32 +137,18 @@ function Section({ title, children }) {
   )
 }
 
-// Renders only the links that actually exist and aren't "[ADD ...]" placeholders.
-// If none exist at all, the whole "Links" section is skipped — no header, no fallback text.
-function LinksSection({ project }) {
-  const hasWebsite = project.links.website && !project.links.website.startsWith('[')
-  const hasApp = Boolean(project.links.app)
-  const hasReference = Boolean(project.links.reference)
-
-  if (!hasWebsite && !hasApp && !hasReference) return null
-
-  return (
-    <Section title="Links">
-      <div className="flex flex-wrap gap-3">
-        {hasWebsite && <LinkPill href={project.links.website} label="Website" />}
-        {hasApp && <LinkPill href={project.links.app} label="Google Play" />}
-        {hasReference && (
-          <LinkPill href={project.links.reference.url} label={project.links.reference.label} />
-        )}
-      </div>
-    </Section>
-  )
-}
-
 function LinkPill({ href, label }) {
+  const isPlaceholder = href.startsWith('[')
+  if (isPlaceholder) {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-md border border-dashed border-line2 px-3 py-1.5 font-mono text-xs text-muted2">
+        {href}
+      </span>
+    )
+  }
   return (
-    
-    <a href={href}
+    <a
+      href={href}
       target="_blank"
       rel="noreferrer"
       className="inline-flex items-center gap-1.5 rounded-md border border-line2 bg-panel2 px-3 py-1.5 font-mono text-xs text-text transition-colors hover:border-accent/60 hover:text-accent"
